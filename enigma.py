@@ -1,5 +1,5 @@
 # Enigma Encoder - www.101computing.net/enigma-encoder/
-
+#comment test
 # ----------------- Enigma Settings -----------------
 rotors = ("I", "II", "III")
 reflector = "UKW-B"
