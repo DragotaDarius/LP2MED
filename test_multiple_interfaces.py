@@ -283,6 +283,7 @@
 from tkinter import *
 import tkinter.ttk as ttk
 import base64
+import enigma
 
 class App(Tk):
     def __init__(self):
@@ -401,8 +402,8 @@ class PageOne(ttk.Frame):
         Button(self, font='arial 10 bold', text="Algo 2", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
         Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
 
-        def change_page(self):
-            pass
+        # def change_page(self):
+        #     pass
 
 
 
@@ -412,10 +413,29 @@ class PageTwo(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.make_widget()
     def make_widget(self):
-        ttk.Label(self, text='This is page two').grid(padx=(20,20), pady=(20,20))
-        button1 = ttk.Button(self, text='Previous Page',
-                             command=lambda: self.controller.show_frame(PageOne))
-        button1.grid()
+        # ttk.Label(self, text='This is page two').grid(padx=(20,20), pady=(20,20))
+        # button1 = ttk.Button(self, text='Previous Page', command=lambda: self.controller.show_frame(PageOne))
+        # button1.grid()
+        Text = StringVar()
+        private_key = StringVar()
+        mode = StringVar()
+        Result = StringVar()
+        RadioButton = StringVar()
+        def Mode():
+            Result.set(enigma.enigma(Text.get()))
+        Button(self, font='arial 10 bold', text="Algo 2", fg="black", width="5", height="1",
+               command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
+               command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        # result
+        Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=150)
+
+        ######result button
+        Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+
+
+        Label(self, font='arial 12 bold', text='MESSAGE').place(x=60, y=60)
+        Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
 if __name__ == '__main__':
     app = App()
