@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 import base64
 import enigma
 
+#define main application
 class App(Tk):
     def __init__(self):
         Tk.__init__(self)
@@ -20,29 +21,29 @@ class App(Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+#create page_one interface
 class PageOne(ttk.Frame):
     def __init__(self, parent, controller):
         self.controller = controller
         ttk.Frame.__init__(self, parent)
         self.make_widget()
-
+    #create items (buttons, labels, forms)
     def make_widget(self):
-        self.cvs = Canvas(self, width="500", height="300")
+        self.cvs = Canvas(self, width="500", height="140")
         ttk.Label(self, text='ENCODE DECODE', font='arial 20 bold').pack()
-        ttk.Label(self, text='DataFlair', font='arial 20 bold').pack(side=BOTTOM)
-        self.cvs.pack()
+        ttk.Label(self, text='Dragota & Dumitrescu', font='arial 20 bold').pack(side=BOTTOM)
+        self.cvs.pack() #show canvas
 
-        # define variables
+        # define variables of first algorithm
 
         Text = StringVar()
         private_key = StringVar()
         mode = StringVar()
         Result = StringVar()
-        RadioButton = StringVar()
 
         #######define function#####
 
-        # function to encode
+        # function to encode - first agorithm
 
         def Encode(key, message):
             enc = []
@@ -63,14 +64,14 @@ class PageOne(ttk.Frame):
 
             return "".join(dec)
 
-        # function to set mode
-        def Mode():
-            if (mode.get() == 'e'):
-                Result.set(Encode(private_key.get(), Text.get()))
-            elif (mode.get() == 'd'):
-                Result.set(Decode(private_key.get(), Text.get()))
-            else:
-                Result.set('Invalid Mode')
+        # # function to set mode
+        # def Mode():
+        #     if (mode.get() == 'e'):
+        #         Result.set(Encode(private_key.get(), Text.get()))
+        #     elif (mode.get() == 'd'):
+        #         Result.set(Decode(private_key.get(), Text.get()))
+        #     else:
+        #         Result.set('Invalid Mode')
 
         # Function to exit window
 
@@ -84,8 +85,17 @@ class PageOne(ttk.Frame):
             mode.set("")
             Result.set("")
 
-        def Change():
-            print("TEST")
+
+        # def Change():
+        #     print("TEST")
+
+        def encode_button():
+            Result.set(Encode(private_key.get(), Text.get()))
+
+
+        def decode_button():
+            Text.set(Result.get())
+            Result.set(Decode(private_key.get(), Text.get()))
 
         #################### Label and Button #############
 
@@ -98,22 +108,29 @@ class PageOne(ttk.Frame):
         Entry(self, font='arial 10', textvariable=private_key, bg='ghost white').place(x=290, y=90)
 
         # mode
-        Label(self, font='arial 12 bold', text='MODE(e-encode, d-decode)').place(x=60, y=120)
-        Entry(self, font='arial 10', textvariable=mode, bg='ghost white').place(x=290, y=120)
+        Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
+        # Entry(self, font='arial 10', textvariable=mode, bg='ghost white').place(x=290, y=120)
 
         # result
         Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=150)
 
-        ######result button
-        Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+        # ######result button
+        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+
+        # encode button
+        Button(self, font='arial 10 bold', text='Encode', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
+
+        # decode button
+        Button(self, font='arial 10 bold', text='Decode', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
 
         # reset button
-        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='LimeGreen', padx=2).place(x=80,
-                                                                                                               y=190)
+        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
+        # result label
+        Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=150)
 
-        # change encription button
-        Button(self, font='arial 10 bold', text='CHANGE', width=6, command=lambda: self.controller.show_frame(PageTwo), bg='LimeGreen', padx=2).place(x=280,
-                                                                                                                 y=190)
+        # # change encription button
+        # Button(self, font='arial 10 bold', text='CHANGE', width=6, command=lambda: self.controller.show_frame(PageTwo), bg='LimeGreen', padx=2).place(x=280,
+        #                                                                                                          y=190)
 
         # # exit button
         # Button(self, font='arial 10 bold', text='EXIT', width=6, command=Exit, bg='OrangeRed', padx=2, pady=2).place(
