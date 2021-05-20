@@ -100,11 +100,11 @@ class PageOne(ttk.Frame):
         #################### Label and Button #############
 
         # Message
-        Label(self, font='arial 12 bold', text='MESSAGE').place(x=60, y=60)
+        Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
         # key
-        Label(self, font='arial 12 bold', text='KEY').place(x=60, y=90)
+        Label(self, font='arial 12 bold', text='KEY:').place(x=60, y=90)
         Entry(self, font='arial 10', textvariable=private_key, bg='ghost white').place(x=290, y=90)
 
         # mode
@@ -115,13 +115,13 @@ class PageOne(ttk.Frame):
         Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=150)
 
         # ######result button
-        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+        # Button(self, font='arial 10 bold', text='RESULT:', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
 
         # encode button
-        Button(self, font='arial 10 bold', text='Encode', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
+        Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
 
         # decode button
-        Button(self, font='arial 10 bold', text='Decode', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
+        Button(self, font='arial 10 bold', text='DECODE', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
 
         # reset button
         Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
@@ -136,7 +136,7 @@ class PageOne(ttk.Frame):
         # Button(self, font='arial 10 bold', text='EXIT', width=6, command=Exit, bg='OrangeRed', padx=2, pady=2).place(
         #     x=180, y=190)
         Button(self, font='arial 10 bold', text="Algo 2", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
-        Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
+        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
 
         # def change_page(self):
         #     pass
@@ -152,6 +152,8 @@ class PageTwo(ttk.Frame):
         # ttk.Label(self, text='This is page two').grid(padx=(20,20), pady=(20,20))
         # button1 = ttk.Button(self, text='Previous Page', command=lambda: self.controller.show_frame(PageOne))
         # button1.grid()
+        ttk.Label(self, text='ENCODE DECODE', font='arial 20 bold').pack()
+        ttk.Label(self, text='Dragota & Dumitrescu', font='arial 20 bold').pack(side=BOTTOM)
         Text = StringVar()
         private_key = StringVar()
         mode = StringVar()
@@ -163,11 +165,11 @@ class PageTwo(ttk.Frame):
         #pages
         Button(self, font='arial 10 bold', text="Algo 1", fg="black", width="5", height="1",
                command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
-        Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
-               command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
+        #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
         #----BUTTONS-----
         # result
-        Label(self, font='arial 12 bold', text='RESULT').place(x=60, y=90)
+        Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=90)
         Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=90)
 
         def encode_button():
@@ -188,17 +190,17 @@ class PageTwo(ttk.Frame):
         # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
 
         # encode button
-        Button(self, font='arial 10 bold', text='Encode', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
+        Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
 
         # decode button
-        Button(self, font='arial 10 bold', text='Decode', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
+        Button(self, font='arial 10 bold', text='DECODE', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
         Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
 
         #result
         Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
 
         #Message
-        Label(self, font='arial 12 bold', text='MESSAGE').place(x=60, y=60)
+        Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
 
