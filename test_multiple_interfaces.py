@@ -75,8 +75,8 @@ class PageOne(ttk.Frame):
 
         # Function to exit window
 
-        def Exit():
-            self.destroy()
+        # def Exit():
+        #     self.destroy()
 
         # Function to reset
         def Reset():
@@ -159,19 +159,49 @@ class PageTwo(ttk.Frame):
         RadioButton = StringVar()
         def Mode():
             Result.set(enigma.enigma(Text.get()))
-        Button(self, font='arial 10 bold', text="Algo 2", fg="black", width="5", height="1",
+
+        #pages
+        Button(self, font='arial 10 bold', text="Algo 1", fg="black", width="5", height="1",
                command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
         Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
                command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        #----BUTTONS-----
         # result
-        Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=150)
+        Label(self, font='arial 12 bold', text='RESULT').place(x=60, y=90)
+        Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=90)
+
+        def encode_button():
+            Result.set(enigma.enigma(Text.get()))
+
+
+        def decode_button():
+            Text.set(Result.get())
+            Result.set(enigma.enigma(Text.get()))
+
+        def Reset():
+            Text.set("")
+            private_key.set("")
+            mode.set("")
+            Result.set("")
 
         ######result button
-        Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
 
+        # encode button
+        Button(self, font='arial 10 bold', text='Encode', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
 
+        # decode button
+        Button(self, font='arial 10 bold', text='Decode', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
+        Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
+
+        #result
+        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
+
+        #Message
         Label(self, font='arial 12 bold', text='MESSAGE').place(x=60, y=60)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
+
+
 
 if __name__ == '__main__':
     app = App()
