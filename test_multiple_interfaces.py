@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter.ttk as ttk
 import base64
 import enigma
+import Swap_chars
 
 #define main application
 class App(Tk):
@@ -11,7 +12,7 @@ class App(Tk):
         container = ttk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         self.frames = {}
-        for F in (PageOne, PageTwo):
+        for F in (PageOne, PageTwo,PageThree):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky='NSEW')
@@ -137,6 +138,7 @@ class PageOne(ttk.Frame):
         # Button(self, font='arial 10 bold', text='EXIT', width=6, command=Exit, bg='OrangeRed', padx=2, pady=2).place(
         #     x=180, y=190)
         Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Swap", fg="black", width="6", height="1",command=lambda: self.controller.show_frame(PageThree)).place(x=60, y=0)
         # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
 
         # def change_page(self):
@@ -166,6 +168,8 @@ class PageTwo(ttk.Frame):
         #pages
         Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1",
                command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Swap", fg="black", width="6", height="1",
+               command=lambda: self.controller.show_frame(PageThree)).place(x=52, y=0)
         # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
         #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
         #----BUTTONS-----
@@ -203,6 +207,66 @@ class PageTwo(ttk.Frame):
         #Message
         Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
         Label(self, font='arial 15 bold', text='ENIGMA').place(x=200, y=30)
+        Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
+
+class PageThree(ttk.Frame):
+    def __init__(self, parent, controller):
+        self.controller = controller
+        ttk.Frame.__init__(self, parent)
+        self.make_widget()
+
+    def make_widget(self):
+        ttk.Label(self, text='ENCODE DECODE', font='arial 20 bold').pack()
+        ttk.Label(self, text='Dragota & Dumitrescu', font='arial 20 bold').pack(side=BOTTOM)
+        Text = StringVar()
+        mode = StringVar()
+        Result = StringVar()
+
+        def Mode():
+            Result.set(Swap_chars.swap(Text.get()))
+
+        # pages
+        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1",command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1",
+               command=lambda: self.controller.show_frame(PageTwo)).place(x=52, y=0)
+        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
+        #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        # ----BUTTONS-----
+        # result
+        Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=90)
+        Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=90)
+
+        def encode_button():
+            Result.set(Swap_chars.swap(Text.get()))
+
+        def decode_button():
+            Text.set(Result.get())
+            Result.set(Swap_chars.swap(Text.get()))
+
+        def Reset():
+            Text.set("")
+            mode.set("")
+            Result.set("")
+
+        ######result button
+        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+
+        # encode button
+        Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(
+            x=290, y=115)
+
+        # decode button
+        Button(self, font='arial 10 bold', text='DECODE', padx=2, bg='deepskyblue', command=decode_button).place(
+            x=370, y=115)
+        Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
+
+        # result
+        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(
+            side=BOTTOM)
+
+        # Message
+        Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
+        Label(self, font='arial 15 bold', text='SWAP').place(x=200, y=30)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
 
