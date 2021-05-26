@@ -101,6 +101,7 @@ class PageOne(ttk.Frame):
 
         # Message
         Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
+        Label(self, font='arial 15 bold', text='BASE64').place(x=200, y=30)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
         # key
@@ -135,7 +136,7 @@ class PageOne(ttk.Frame):
         # # exit button
         # Button(self, font='arial 10 bold', text='EXIT', width=6, command=Exit, bg='OrangeRed', padx=2, pady=2).place(
         #     x=180, y=190)
-        Button(self, font='arial 10 bold', text="Algo 2", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
         # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
 
         # def change_page(self):
@@ -163,7 +164,7 @@ class PageTwo(ttk.Frame):
             Result.set(enigma.enigma(Text.get()))
 
         #pages
-        Button(self, font='arial 10 bold', text="Algo 1", fg="black", width="5", height="1",
+        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1",
                command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
         # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
         #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
@@ -201,6 +202,7 @@ class PageTwo(ttk.Frame):
 
         #Message
         Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)
+        Label(self, font='arial 15 bold', text='ENIGMA').place(x=200, y=30)
         Entry(self, font='arial 10', textvariable=Text, bg='ghost white').place(x=290, y=60)
 
 
