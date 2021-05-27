@@ -28,6 +28,7 @@ class PageOne(ttk.Frame):
         self.controller = controller
         ttk.Frame.__init__(self, parent)
         self.make_widget()
+
     #create items (buttons, labels, forms)
     def make_widget(self):
         self.cvs = Canvas(self, width="500", height="140")
@@ -36,7 +37,6 @@ class PageOne(ttk.Frame):
         self.cvs.pack() #show canvas
 
         # define variables of first algorithm
-
         Text = StringVar()
         private_key = StringVar()
         mode = StringVar()
@@ -45,7 +45,6 @@ class PageOne(ttk.Frame):
         #######define function#####
 
         # function to encode - first agorithm
-
         def Encode(key, message):
             enc = []
             for i in range(len(message)):
@@ -55,7 +54,6 @@ class PageOne(ttk.Frame):
             return base64.urlsafe_b64encode("".join(enc).encode()).decode()
 
         # function to decode
-
         def Decode(key, message):
             dec = []
             message = base64.urlsafe_b64decode(message).decode()
@@ -65,20 +63,6 @@ class PageOne(ttk.Frame):
 
             return "".join(dec)
 
-        # # function to set mode
-        # def Mode():
-        #     if (mode.get() == 'e'):
-        #         Result.set(Encode(private_key.get(), Text.get()))
-        #     elif (mode.get() == 'd'):
-        #         Result.set(Decode(private_key.get(), Text.get()))
-        #     else:
-        #         Result.set('Invalid Mode')
-
-        # Function to exit window
-
-        # def Exit():
-        #     self.destroy()
-
         # Function to reset
         def Reset():
             Text.set("")
@@ -86,9 +70,6 @@ class PageOne(ttk.Frame):
             mode.set("")
             Result.set("")
 
-
-        # def Change():
-        #     print("TEST")
 
         def encode_button():
             Result.set(Encode(private_key.get(), Text.get()))
@@ -111,13 +92,9 @@ class PageOne(ttk.Frame):
 
         # mode
         Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
-        # Entry(self, font='arial 10', textvariable=mode, bg='ghost white').place(x=290, y=120)
 
         # result
         Entry(self, font='arial 10 bold', textvariable=Result, bg='ghost white').place(x=290, y=150)
-
-        # ######result button
-        # Button(self, font='arial 10 bold', text='RESULT:', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
 
         # encode button
         Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
@@ -127,23 +104,12 @@ class PageOne(ttk.Frame):
 
         # reset button
         Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
+
         # result label
         Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=150)
 
-        # # change encription button
-        # Button(self, font='arial 10 bold', text='CHANGE', width=6, command=lambda: self.controller.show_frame(PageTwo), bg='LimeGreen', padx=2).place(x=280,
-        #                                                                                                          y=190)
-
-        # # exit button
-        # Button(self, font='arial 10 bold', text='EXIT', width=6, command=Exit, bg='OrangeRed', padx=2, pady=2).place(
-        #     x=180, y=190)
         Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=0, y=0)
         Button(self, font='arial 10 bold', text="Swap", fg="black", width="6", height="1",command=lambda: self.controller.show_frame(PageThree)).place(x=60, y=0)
-        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=50, y=0)
-
-        # def change_page(self):
-        #     pass
-
 
 
 class PageTwo(ttk.Frame):
@@ -152,26 +118,17 @@ class PageTwo(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.make_widget()
     def make_widget(self):
-        # ttk.Label(self, text='This is page two').grid(padx=(20,20), pady=(20,20))
-        # button1 = ttk.Button(self, text='Previous Page', command=lambda: self.controller.show_frame(PageOne))
-        # button1.grid()
         ttk.Label(self, text='ENCODE DECODE', font='arial 20 bold').pack()
         ttk.Label(self, text='Dragota & Dumitrescu', font='arial 20 bold').pack(side=BOTTOM)
+
+        # define variables of second algorithm
         Text = StringVar()
-        private_key = StringVar()
-        mode = StringVar()
         Result = StringVar()
-        RadioButton = StringVar()
-        def Mode():
-            Result.set(enigma.enigma(Text.get()))
 
         #pages
-        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1",
-               command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
-        Button(self, font='arial 10 bold', text="Swap", fg="black", width="6", height="1",
-               command=lambda: self.controller.show_frame(PageThree)).place(x=52, y=0)
-        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
-        #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Swap", fg="black", width="6", height="1", command=lambda: self.controller.show_frame(PageThree)).place(x=52, y=0)
+
         #----BUTTONS-----
         # result
         Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=90)
@@ -180,19 +137,13 @@ class PageTwo(ttk.Frame):
         def encode_button():
             Result.set(enigma.enigma(Text.get()))
 
-
         def decode_button():
             Text.set(Result.get())
             Result.set(enigma.enigma(Text.get()))
 
         def Reset():
             Text.set("")
-            private_key.set("")
-            mode.set("")
             Result.set("")
-
-        ######result button
-        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
 
         # encode button
         Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
@@ -218,19 +169,15 @@ class PageThree(ttk.Frame):
     def make_widget(self):
         ttk.Label(self, text='ENCODE DECODE', font='arial 20 bold').pack()
         ttk.Label(self, text='Dragota & Dumitrescu', font='arial 20 bold').pack(side=BOTTOM)
+
+        # define variables of third algorithm
         Text = StringVar()
-        mode = StringVar()
         Result = StringVar()
 
-        def Mode():
-            Result.set(Swap_chars.swap(Text.get()))
-
         # pages
-        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1",command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
-        Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1",
-               command=lambda: self.controller.show_frame(PageTwo)).place(x=52, y=0)
-        # Button(self, font='arial 10 bold', text="Algo 3", fg="black", width="5", height="1",
-        #        command=lambda: self.controller.show_frame(PageOne)).place(x=50, y=0)
+        Button(self, font='arial 10 bold', text="Base64", fg="black", width="5", height="1", command=lambda: self.controller.show_frame(PageOne)).place(x=0, y=0)
+        Button(self, font='arial 10 bold', text="Enigma", fg="black", width="6", height="1", command=lambda: self.controller.show_frame(PageTwo)).place(x=52, y=0)
+
         # ----BUTTONS-----
         # result
         Label(self, font='arial 12 bold', text='RESULT:').place(x=60, y=90)
@@ -245,24 +192,17 @@ class PageThree(ttk.Frame):
 
         def Reset():
             Text.set("")
-            mode.set("")
             Result.set("")
 
-        ######result button
-        # Button(self, font='arial 10 bold', text='RESULT', padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
-
         # encode button
-        Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(
-            x=290, y=115)
+        Button(self, font='arial 10 bold', text='ENCODE', padx=2, bg='deepskyblue', command=encode_button).place(x=290, y=115)
 
         # decode button
-        Button(self, font='arial 10 bold', text='DECODE', padx=2, bg='deepskyblue', command=decode_button).place(
-            x=370, y=115)
+        Button(self, font='arial 10 bold', text='DECODE', padx=2, bg='deepskyblue', command=decode_button).place(x=370, y=115)
         Label(self, font='arial 12 bold', text='MODE:').place(x=60, y=120)
 
         # result
-        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(
-            side=BOTTOM)
+        Button(self, font='arial 10 bold', text='RESET', width=6, command=Reset, bg='salmon2', padx=2).pack(side=BOTTOM)
 
         # Message
         Label(self, font='arial 12 bold', text='MESSAGE:').place(x=60, y=60)

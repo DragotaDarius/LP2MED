@@ -191,12 +191,7 @@ def enigma(input):
 
 
     # Main Program Starts Here
-    print("  ##### Enigma Encoder #####")
-    print("")
     plaintext = input
-    # plaintext = input("Enter text to encode or decode:\n")
     ciphertext = encode(plaintext)
 
-    # print("\nEncoded text: \n " + ciphertext)
     return ciphertext
-# enigma("test")
